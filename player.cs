@@ -4,6 +4,12 @@ public partial class Player : CharacterBody2D
 {
 	[Export]
 	public int Speed { get; set; } = 400;
+	private Happy_boo HappyBoo;
+
+	public override void _Ready()
+	{
+		HappyBoo = GetNode<Happy_boo>("HappyBoo");
+	}
 
 	public void GetInput()
 	{
@@ -16,5 +22,14 @@ public partial class Player : CharacterBody2D
 	{
 		GetInput();
 		MoveAndSlide();
+
+		if (Velocity.Length() > 0.0)
+		{
+			HappyBoo.Play_walk_animation();
+		}
+		else
+		{
+			HappyBoo.Play_idle_animation();
+		}
 	}
 }
